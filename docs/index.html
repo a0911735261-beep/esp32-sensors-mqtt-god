@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="ESP32 Sensors MQTT e-Paper：以 ESP32、DHT11、光敏電阻與 Waveshare 2.9 吋三色電子紙打造的環境感測器。">
+    <title>ESP32 Sensors MQTT · e-Paper Lab</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav container" aria-label="主選單">
+        <a class="brand" href="#top"><span class="brand-mark">◈</span> ESP32 SENSOR LAB</a>
+        <div class="nav-links">
+          <a href="#features">功能</a>
+          <a href="#hardware">硬體</a>
+          <a href="#mqtt">MQTT</a>
+          <a class="nav-github" href="https://github.com/a0911735261-beep/esp32-sensors-mqtt-god" target="_blank" rel="noreferrer">GitHub ↗</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero container">
+        <div class="hero-copy">
+          <p class="eyebrow">OPEN HARDWARE · ESP32 · MQTT</p>
+          <h1>把環境資料，<em>清楚地</em>寫在電子紙上。</h1>
+          <p class="hero-text">一個可實作、可擴充的 ESP32 環境感測專案：讀取溫度、濕度與相對亮度，透過 MQTT 傳送到網路，再以低耗電的三色電子紙呈現即時狀態。</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="https://github.com/a0911735261-beep/esp32-sensors-mqtt-god" target="_blank" rel="noreferrer">查看原始碼 <span>→</span></a>
+            <a class="button button-quiet" href="#quickstart">快速開始</a>
+          </div>
+          <div class="hero-meta">
+            <span><b>296 × 128</b> e-Paper</span>
+            <span><b>60s</b> 感測週期</span>
+            <span><b>5</b> MQTT Topics</span>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="visual-glow"></div>
+          <div class="epaper-frame">
+            <div class="epaper-screen">
+              <div class="screen-top"><span>ENV MONITOR</span><strong>60 SEC</strong></div>
+              <div class="screen-rule"></div>
+              <div class="screen-cards">
+                <div class="screen-card"><span class="screen-icon">°</span><small>TEMP</small><b>26</b><i>°C</i><label>OK</label></div>
+                <div class="screen-card"><span class="screen-icon">⌁</span><small>HUMID</small><b>68</b><i>%RH</i><label>OK</label></div>
+                <div class="screen-card"><span class="screen-icon">☼</span><small>LIGHT</small><b>742</b><i>LUX</i><label>OK</label></div>
+              </div>
+            </div>
+          </div>
+          <span class="pin pin-one">GPIO 14 · DHT11</span>
+          <span class="pin pin-two">GPIO 33 · LIGHT</span>
+          <span class="pin pin-three">MQTT / Wi-Fi</span>
+        </div>
+      </section>
+
+      <section class="section section-tint" id="features">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">WHY THIS PROJECT</p>
+            <h2>小型裝置，也能有完整的資料流。</h2>
+            <p>從感測器、微控制器、無線網路到視覺化輸出，每一層都保持簡單、透明，適合學習、展示與後續改造。</p>
+          </div>
+          <div class="feature-grid">
+            <article class="feature-card"><span class="feature-number">01</span><h3>多感測輸入</h3><p>DHT11 讀取溫度與濕度，光敏電阻提供 0～1000 的相對亮度值。</p></article>
+            <article class="feature-card"><span class="feature-number">02</span><h3>低功耗顯示</h3><p>Waveshare 2.9 吋黑白紅三色電子紙，讓資訊在斷電後仍能保留。</p></article>
+            <article class="feature-card"><span class="feature-number">03</span><h3>MQTT 控制</h3><p>週期發布資料，也能用 ON、OFF、TOGGLE 指令控制外部燈號或繼電器。</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section container gallery" id="hardware">
+        <div class="section-heading split-heading">
+          <div><p class="eyebrow">BUILD LOG</p><h2>從接線到顯示，<br>每一步都看得見。</h2></div>
+          <p>專案附有硬體接線圖、電子紙畫面預覽與 Arduino 程式，可直接從 GitHub 下載並在自己的 ESP32 上重現。</p>
+        </div>
+        <div class="gallery-grid">
+          <figure class="gallery-main"><img src="assets/doc03_contact.png" alt="ESP32 與電子紙感測器接線圖"><figcaption><span>01 / WIRING</span>ESP32 × e-Paper × Sensors</figcaption></figure>
+          <div class="gallery-side">
+            <figure><img src="assets/sensor_preview.png" alt="環境感測器電子紙畫面預覽"><figcaption><span>02 / DISPLAY</span>Sensor dashboard</figcaption></figure>
+            <figure><img src="assets/festival_preview.png" alt="電子紙節慶畫面預覽"><figcaption><span>03 / EXTEND</span>Custom e-Paper content</figcaption></figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="section dark-section" id="mqtt">
+        <div class="container mqtt-layout">
+          <div>
+            <p class="eyebrow eyebrow-red">DATA PIPELINE</p>
+            <h2>一條簡潔的 MQTT 資料管線。</h2>
+            <p class="dark-copy">ESP32 每 60 秒發布感測值，同時訂閱燈號控制主題。你可以把它接到 Node-RED、Home Assistant 或任何 MQTT client。</p>
+          </div>
+          <div class="topic-list">
+            <div class="topic-row"><span class="topic-direction out">OUT</span><code>esp32/epaper/temperature</code><small>溫度 °C</small></div>
+            <div class="topic-row"><span class="topic-direction out">OUT</span><code>esp32/epaper/humidity</code><small>相對濕度</small></div>
+            <div class="topic-row"><span class="topic-direction out">OUT</span><code>esp32/epaper/lux</code><small>相對亮度</small></div>
+            <div class="topic-row"><span class="topic-direction in">IN</span><code>esp32/epaper/light/set</code><small>ON / OFF / TOGGLE</small></div>
+            <div class="topic-row"><span class="topic-direction state">STATE</span><code>esp32/epaper/status</code><small>ONLINE / OFFLINE</small></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section container quickstart" id="quickstart">
+        <div class="section-heading"><p class="eyebrow">QUICK START</p><h2>三步開始你的第一個版本。</h2></div>
+        <div class="steps">
+          <div class="step"><span>01</span><h3>準備硬體</h3><p>連接 ESP32、2.9 吋 B V4 電子紙、DHT11、光敏電阻與輸出燈號。</p></div>
+          <div class="step"><span>02</span><h3>設定環境</h3><p>安裝 ESP32 Arduino Core 與 GxEPD2，填入本機 Wi-Fi 與 MQTT 設定。</p></div>
+          <div class="step"><span>03</span><h3>上傳並觀察</h3><p>開啟 <code>40_epaper_mqtt.ino</code>，上傳後用 MQTT client 觀察資料。</p></div>
+        </div>
+        <div class="cta">
+          <div><p class="eyebrow">READY TO BUILD?</p><h3>把這個展示變成你的裝置。</h3></div>
+          <a class="button button-light" href="https://github.com/a0911735261-beep/esp32-sensors-mqtt-god#readme" target="_blank" rel="noreferrer">閱讀完整 README ↗</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer"><div class="container footer-inner"><span>ESP32 SENSORS MQTT · 2026</span><span>Built for learning, prototyping &amp; sharing.</span></div></footer>
+    <script src="script.js"></script>
+  </body>
+</html>
