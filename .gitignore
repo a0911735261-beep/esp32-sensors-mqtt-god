@@ -37,3 +37,7 @@ secrets.h
 config.local.h
 credentials.h
 
+# Personal study/exam screenshots (not part of the project showcase)
+image5_crop*.png
+image6_crop*.png
+q59.png
