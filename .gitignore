@@ -1,0 +1,39 @@
+# Arduino / PlatformIO build output
+/build/
+/build2/
+/build3/
+/.pio/
+**/build/
+**/build-*/
+
+# IDE and local-machine files
+.vscode/
+.idea/
+*.user
+*.suo
+*.opensdf
+*.sdf
+
+# Generated binaries and intermediate files
+*.elf
+*.bin
+*.hex
+*.map
+*.o
+*.a
+*.lib
+*.so
+*.pyc
+__pycache__/
+
+# Downloaded archives and vendor bundles
+/*.zip
+**/*.zip
+
+# Local secrets and machine-specific configuration
+.env
+.env.*
+secrets.h
+config.local.h
+credentials.h
+
